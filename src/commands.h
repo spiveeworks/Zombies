@@ -65,9 +65,30 @@ unsigned identify (string id) {
 }
 
 unsigned open (string target) {
-/* 
-	entity* toOpen = IntEnt(target);
-	switch (getmod_OS (*toOpen) -> open())
+
+	entity* toOpen;
+	try
+	{
+		toOpen = IntEnt.at(target);
+	}
+	catch(std::out_of_range const &err)
+	{
+		cout << "No such thing exists\r\n";
+		return 0;
+	}
+	
+	mod::BasicLock *use;
+	try
+	{
+		use = static_cast<mod::BasicLock*> (toOpen -> ShowMod(2));
+	}
+	catch (std::out_of_range const &err)
+	{
+		cout << "Impossible!";
+		return 0;
+	}
+	
+	switch (use -> open())
 	{
 	case invalid:
 		cout << "Impossible!";
@@ -85,7 +106,7 @@ unsigned open (string target) {
 		cout << "An unknown error occured.";
 	}
 	cout << "\r\n";
- */
+ 
 	return 0;
 }
 

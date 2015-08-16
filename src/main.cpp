@@ -4,9 +4,12 @@
 #include <array>
 #include <vector>
 #include <map>
-#include <list>
+#include <set>
 
-#include "environment.h"
+//#include <list>
+
+#include "item.cpp"
+#include "entity.cpp"
 
 
 #include <iostream>
@@ -15,6 +18,8 @@
 using namespace std;
 
 ItemSpace hand;
+
+map<string, entity*> IntEnt;
 
 #include "commands.h"
 
@@ -54,19 +59,12 @@ int main () {
 		
 		cat_item = Catalogue<ItemSpecies> (temp, temp + 3);
 	}
-	/* 
-	for (ItemSpecies &test2: cat_item.space)
-		cout << (test2.dev_str == test.dev_str);
-	*/
 	
-	//Santa.push_back (&hand, "hand");
+	StockEntity::door leDoor;
+	StockEntity::cabinet leCabinet;
 	
-//	room.entities.spawnel (1);
-//	room.entities.spawnel (2);
-//	IntEnt.push_back (room.entities[1], "door");
-//	IntEnt.push_back (room.entities[2], "cabinet");
-	
-	//EntitySet ents;
+	IntEnt["door"] = &leDoor;
+	IntEnt["cabinet"] = &leCabinet;
 	
 	
 //	entity* door = new entity (room, GetStockModuleSet(1), GetStockModuleSize(1));//make a door for individual testing
