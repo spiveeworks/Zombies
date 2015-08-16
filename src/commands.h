@@ -1,72 +1,70 @@
-#include <iostream>
-#include <string>
-#include <sstream>
+
 #include "command_container.cpp"
-using namespace std;
-using namespace ComCon;
 
 
-unsigned C_exit (string arb) {
+namespace Co_ 
+	{
+
+unsigned exit (string arb) {
 	return 1;
 }
 
-unsigned C_spawn (string name) {
-/*
-	ItemType typen = type.find(name);
-	if (typen == 0) 
-		cout << "Please enter a valid item type\r\n";
-	else
+unsigned spawn (string name) {
+	
+	try
 	{
-		LocId place = hand.spawnel (typen);
+		DevStrType name_d;
+		ItemType type = cat_item.sorted.at(MakeDevStr(name));
+		unsigned place = hand.create(type);
 		cout << "Spawned a(n) " << name << " at location " << place << "!\r\n";
 	}
-*/
+	catch (std::out_of_range const &err)
+	{
+		cout << "Please enter a valid item type\r\n";
+	}
+	//catch (...) {}
 	return 0;
 }
 
-unsigned C_delete (string name) {
-/*
-	LocId X;
+unsigned destroy (string name) {
+
+	ordinal X;
 	if (stringstream (name) >> X)
 	{
-		if (hand.deleteel (X))
-			cout << "Deleted item! :D";
-		else
+		try 
+		{
+			hand.remove (X);
+			cout << "Deleted item! :D\r\n";
+		}
+		catch(std::out_of_range const& err) 
+		{
 			cout << "Error deleting item " << name << ".\r\n";
+		}
 	}
 	else
 	{
 		cout << "Please enter a valid number\r\n";
 	}
-*/
+
 	return 0;
 }
 
-unsigned C_identify (string id) {
-	/*cout << "Item is of type: ";
-	switch (getItemType ()) {
-		case ECO_ITEM_axe:
-			cout << "axe";
-		break;
-		case ECO_ITEM_bat:
-			cout << "bat";
-		break;
-	}*/
-	/* 
-	LocId X;
+unsigned identify (string id) {
+	
+	unsigned X;
 	if (stringstream (id) >> X)
-		if (hand [X] != 0)
-			cout << "The item is a(n) " << type.getname(hand [X]->getid ());
+		if (hand.el()[X] != nullptr)
+			cout << "The item is a(n) " << ( hand.el()[X] -> getName().data() );
 		else
 			cout << "No item here.";
 	else
 		cout << "Please enter a valid number";
 	cout << "\r\n";
-	*/
+	
 	return 0;
 }
 
-unsigned C_open (string target) {
+unsigned open (string target) {
 /* 
 	entity* toOpen = IntEnt(target);
 	switch (getmod_OS (*toOpen) -> open())
@@ -162,7 +160,11 @@ unsigned C_spoilG (string arb) {
 	}
 }
 */
-unsigned C_badcommand (string arb) {
+unsigned badcommand (string arb) {
 	cout << "Please enter a valid command" << endl;
 	return 0;
 }
+
+
+	}
+

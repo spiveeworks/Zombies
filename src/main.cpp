@@ -1,52 +1,70 @@
-//#include "eco.cpp"
+
+#include <string>
+
+#include <array>
+#include <vector>
+#include <map>
+#include <list>
+
+#include "environment.h"
 
 
-//interpretor<entity> IntEnt;
-//domain room;
+#include <iostream>
+#include <sstream>
+
+using namespace std;
+
+ItemSpace hand;
+
 #include "commands.h"
 
-//typedef vector<command> context;
 
-context HC_Cc_main ();
+ComCon::context HC_Cc_main ();
 
-context Cc_interpret;
+ComCon::context Cc_interpret;
 
 
-#define APPEND(ident) push_back(command(# ident , C_ ## ident , " "))
-context HC_Cc_main () {
-	std::vector<command> set;
+#define APPEND(ident) push_back(ComCon::command(# ident , Co_::ident , " "))
+ComCon::context HC_Cc_main () {
+	std::vector<ComCon::command> set;
 	set.APPEND(exit);
 	set.APPEND(spawn);
+	set.APPEND(destroy);
 	set.APPEND(identify);
 	set.APPEND(open);
-	context out;
-	out.script_d = C_badcommand;
+	ComCon::context out;
+	out.script_d = Co_::badcommand;
 	swap(out.comm, set);
 	return out;
 }
 #undef APPEND
 
-//domain* playerlocation;
 
 int main () {
-/*
-#define initialise(pre, num, name) const ItemType pre ## name = num; type [num] = #name;
-	initialise (xECO_ITEM_, 0, null);
-	initialise (xECO_ITEM_, 1, axe);
-	initialise (xECO_ITEM_, 2, bat);
-#undef initialise
-*/
-	//Santa.push_back (&hand, "hand");
+	ItemSpecies test;
+	{
+		ItemSpecies temp[3];
+#define INIT_SPECIES(pre, num, name) const ItemType pre ## name = num; temp[num] = ItemSpecies(MakeDevStr(#name));
+#define SPEC_CONST xECO_ITEM_
+		INIT_SPECIES (SPEC_CONST_, 0, null);
+		INIT_SPECIES (SPEC_CONST_, 1, axe);
+		INIT_SPECIES (SPEC_CONST_, 2, bat);
+#undef INIT_SPECIES
+#undef SPEC_CONST
+		
+		cat_item = Catalogue<ItemSpecies> (temp, temp + 3);
+	}
+	/* 
+	for (ItemSpecies &test2: cat_item.space)
+		cout << (test2.dev_str == test.dev_str);
+	*/
 	
-	//type.Default.name = "null";
-	//type.push_back (new scaffold ("axe"), "axe");
-	//type.push_back (new scaffold ("bat"), "axe");
+	//Santa.push_back (&hand, "hand");
 	
 //	room.entities.spawnel (1);
 //	room.entities.spawnel (2);
 //	IntEnt.push_back (room.entities[1], "door");
 //	IntEnt.push_back (room.entities[2], "cabinet");
-	std::cout << "\r\n\r\n";
 	
 	//EntitySet ents;
 	
@@ -60,7 +78,9 @@ int main () {
 	//cout << stringifystate (OS -> open()) << "\r\n";
 	//cout << ents[1] -> getmem();
 	
+	//std::cout << "  * * * END DEBUG * * *" << endl;
 	Cc_interpret = HC_Cc_main ();
+	Co_::spawn("axe");
 	int retval = 0;
 	while (retval == 0)
 	{
