@@ -1,14 +1,13 @@
 Zombies
 =======
 
-A text based zombie sim built in C++, designed to be somewhere between an interactive novel RPG and a text based framework for apocalypse roleplay.
+Some hopeful design, and some UI functionality for command input.
 
-This project is not very deep at the moment, but it is in active development at some times. 
 https://spiveeworks.wordpress.com/
-This wordpress blog is about this project and another project or two of mine.
+This wordpress blog was about this project and another project or two of mine.
 
 The zombies project is based in simple C++ (Now C++11 :D) and is designed to be compiled with MinGW.
 
-Feel free to contribute anything from support to ideas to similar projects you have created.
+This was a learning project, and never got close to my actual intentions. It does include some early look-ins at dynamic objects that could be customized at run time, to make modifiable environments, but it was probably at this point that I felt that the code I was making was better suited elsewhere. 
 
-Note that this is half an exploration of gameplay for myself personally, and half a learning project on simple text based operations in C++.
+I'm fairly certain that the code here will turn into a text based interface for my "Civil" project. (formerly RPGengine)\
